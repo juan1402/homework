@@ -1,0 +1,18 @@
+apply plugin: 'com.android.library'
+apply from: "$project.rootDir/commons.gradle"
+
+dependencies {
+    // Common:
+    implementation rootProject.ext.common.kotlin_stdlib_jdk7
+    implementation rootProject.ext.common.core_ktlx
+
+    //testing
+    testImplementation rootProject.ext.testCommon.junit
+    testImplementation rootProject.ext.testCommon.core_testing
+    testImplementation rootProject.ext.testCommon.koin_test
+    implementation rootProject.ext.testCommon.test_core
+
+    // di
+    implementation rootProject.ext.koin.koin
+    implementation rootProject.ext.koin.koin_scope
+}

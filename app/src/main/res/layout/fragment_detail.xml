@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.sweatworks.homework.ui.detail.DetailViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:title="@string/app_name">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:background="@color/background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/profile_pic"
+                        android:layout_width="@dimen/horizontal_item_width"
+                        android:layout_height="@dimen/horizontal_item_width"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:loadImageUrl="@{viewModel.currentUser.largePicture}"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/common_text_padding"
+                        android:paddingTop="@dimen/common_small_padding"
+                        android:paddingEnd="@dimen/common_text_padding"
+                        android:paddingBottom="@dimen/common_text_padding"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        app:bindUserName="@{viewModel.currentUser}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/profile_pic"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Luca Girard, France" />
+
+                    <TextView
+                        android:id="@+id/age"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/common_text_padding"
+                        android:paddingEnd="@dimen/common_text_padding"
+                        android:paddingBottom="@dimen/common_text_padding"
+                        app:bindUserAge="@{viewModel.currentUser}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/profile_pic"
+                        app:layout_constraintTop_toBottomOf="@+id/name"
+                        tools:text="Age 29 from Paris" />
+
+                    <TextView
+                        android:id="@+id/contact"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:paddingStart="@dimen/common_text_padding"
+                        android:paddingEnd="@dimen/common_text_padding"
+                        android:paddingBottom="@dimen/common_text_padding"
+                        app:bindContactInfo="@{viewModel.currentUser}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/profile_pic"
+                        app:layout_constraintTop_toBottomOf="@+id/age"
+                        tools:text="sample@gmail.com\n25237719 , 71804685" />
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/common_text_padding"
+                        android:layout_marginEnd="@dimen/common_text_padding"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:onClick="@{() -> viewModel.addToContacts()}"
+                        android:text="@string/add_to_contacts"
+                        android:textColor="@android:color/white"
+                        app:layout_constraintBottom_toBottomOf="@id/profile_pic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/profile_pic"
+                        app:layout_constraintTop_toBottomOf="@+id/contact" />
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/common_text_padding"
+                        android:layout_marginTop="@dimen/common_text_padding"
+                        android:layout_marginEnd="@dimen/common_text_padding"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:onClick="@{() -> viewModel.openInGoogleMaps()}"
+                        android:text="@string/open_in_google_maps"
+                        android:textColor="@android:color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/profile_pic" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/detailGrid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/scrolling_behavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

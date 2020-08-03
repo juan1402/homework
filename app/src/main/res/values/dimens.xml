@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="collapsed_text_size">20sp</dimen>
+    <dimen name="common_divider_space">6dp</dimen>
+    <dimen name="common_text_padding">8dp</dimen>
+    <dimen name="common_small_padding">4dp</dimen>
+    <dimen name="common_corner_radius">15dp</dimen>
+    <dimen name="horizontal_item_width">150dp</dimen>
+</resources>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="scrolling_behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="app_name">Homework</string>
+    <string name="user_name">%s %s, %s</string>
+    <string name="user_contact">%s\n%s, %s</string>
+    <string name="user_age">Age %s from %s</string>
+    <string name="search">Search</string>
+    <string name="add_to_contacts">ADD TO CONTACTS</string>
+    <string name="open_in_google_maps">OPEN IN GOOGLE MAPS</string>
+</resources>

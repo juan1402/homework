@@ -1,0 +1,60 @@
+apply plugin: 'com.android.application'
+apply from: "$project.rootDir/commons.gradle"
+apply plugin: 'kotlin-kapt'
+
+android {
+    defaultConfig {
+        applicationId rootProject.ext.application_id
+        dataBinding{ enabled true }
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    // Module Dependencies:
+    implementation project(":domain")
+    implementation project(":data")
+
+    // Common:
+    implementation rootProject.ext.common.kotlin_stdlib_jdk7
+    implementation rootProject.ext.common.core_ktlx
+    implementation rootProject.ext.common.material
+    implementation rootProject.ext.common.glide
+    annotationProcessor rootProject.ext.common.glide_ap
+
+    // Android:
+    implementation rootProject.ext.common.appcompat
+    implementation rootProject.ext.common.constraintlayout
+
+    // Di:
+    implementation rootProject.ext.koin.koin
+    implementation rootProject.ext.koin.koin_viewmodel
+    implementation rootProject.ext.koin.koin_scope
+
+    // Coroutines:
+    implementation rootProject.ext.coroutines.core
+    implementation rootProject.ext.coroutines.android
+
+    // Arch components:
+    implementation rootProject.ext.arch_components.lifecycle_extensions
+    implementation rootProject.ext.arch_components.lifecycle_viewmodel_ktx
+    implementation rootProject.ext.arch_components.lifecycle_runtime_ktx
+    implementation rootProject.ext.arch_components.lifecycle_livedata_ktx
+
+    // Unit Testing:
+    androidTestImplementation rootProject.ext.testCommon.fragment_test
+    androidTestImplementation rootProject.ext.testCommon.test_core
+    debugImplementation rootProject.ext.testCommon.fragment_test
+    debugImplementation rootProject.ext.testCommon.test_core
+    testImplementation rootProject.ext.testCommon.junit
+    testImplementation rootProject.ext.testCommon.fragment_test
+    testImplementation rootProject.ext.testCommon.robolectric
+    testImplementation rootProject.ext.testCommon.junit
+    testImplementation rootProject.ext.testCommon.mockito_core
+    testImplementation rootProject.ext.testCommon.mockito_kotlin
+    testImplementation rootProject.ext.testCommon.mockito_inline
+    testImplementation rootProject.ext.testCommon.koin_test
+    testImplementation rootProject.ext.testCommon.core_testing
+}

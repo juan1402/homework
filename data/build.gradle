@@ -1,0 +1,37 @@
+apply plugin: 'com.android.library'
+apply from: "$project.rootDir/commons.gradle"
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    // Module Dependencies:
+    implementation project(":domain")
+
+    // Common:
+    implementation rootProject.ext.common.kotlin_stdlib_jdk7
+    implementation rootProject.ext.common.core_ktlx
+
+    // Retrofit:
+    implementation rootProject.ext.retrofit.retrofit
+    implementation rootProject.ext.retrofit.converter_gson
+    implementation rootProject.ext.retrofit.logging_interceptor
+    implementation rootProject.ext.retrofit.retrofit_coroutine_adapter
+
+    // Coroutines:
+    implementation rootProject.ext.coroutines.core
+    implementation rootProject.ext.coroutines.android
+
+    // Room:
+    implementation rootProject.ext.room.room_runtime
+    kapt rootProject.ext.room.room_compiler
+    implementation rootProject.ext.room.room_ktx
+
+    // Di:
+    implementation rootProject.ext.koin.koin
+    implementation rootProject.ext.koin.koin_scope
+
+    // Unit Testing:
+    testImplementation rootProject.ext.testCommon.junit
+    testImplementation rootProject.ext.testCommon.core_testing
+    testImplementation rootProject.ext.testCommon.koin_test
+    implementation rootProject.ext.testCommon.test_core
+}
