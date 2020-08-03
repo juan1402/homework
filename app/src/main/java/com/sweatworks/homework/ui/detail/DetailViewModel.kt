@@ -1,7 +1,6 @@
 package com.sweatworks.homework.ui.detail
 
 import android.os.Bundle
-import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.sweatworks.domain.interaction.user.AddToFavoriteUseCase
@@ -9,6 +8,7 @@ import com.sweatworks.domain.interaction.user.GetUserInfoUseCase
 import com.sweatworks.domain.model.User
 import com.sweatworks.domain.model.onFailure
 import com.sweatworks.domain.model.onSuccess
+import com.sweatworks.homework.common.utils.Event
 import com.sweatworks.homework.common.utils.IntentEvent
 import com.sweatworks.homework.ui.base.BaseActivity
 import com.sweatworks.homework.ui.base.BaseViewModel
@@ -39,7 +39,7 @@ class DetailViewModel(
     }
 
     fun fireDetailEvent(user: User) = intentEvent.apply {
-        value = IntentEvent(DetailActivity::class, detailArguments(user))
+        value = Event(IntentEvent(DetailActivity::class, detailArguments(user)))
     }
 
     private fun detailArguments(user: User) = Bundle().apply {

@@ -17,10 +17,6 @@ class UserAdapter(private val orientation: Int) :
     val userItemActions = MutableLiveData<UserItemActions>()
     private val adapterUserData = ArrayList<User>()
 
-    init {
-        setHasStableIds(true)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         UserItemHolder(
             LayoutInflater.from(parent.context)
@@ -35,12 +31,9 @@ class UserAdapter(private val orientation: Int) :
         )
     }
 
-    override fun getItemId(position: Int) =
-        adapterUserData[position].latitude.toLong()
-
     override fun getItemCount() = adapterUserData.size
 
-    fun replace(elements: List<User>) {
+    fun replaceAll(elements: List<User>) {
         val diffCallback = UserDiffUtil(adapterUserData, elements)
         val diffResult = DiffUtil.calculateDiff(diffCallback, true)
         adapterUserData.clear()
@@ -48,9 +41,10 @@ class UserAdapter(private val orientation: Int) :
         diffResult.dispatchUpdatesTo(this)
     }
 
-    fun update(elements: List<User>) {
+    fun loadMore(elements: List<User>) {
+        val size = adapterUserData.size
         adapterUserData.addAll(elements)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(size, elements.size)
     }
 
     fun replaceItem(user: User) {

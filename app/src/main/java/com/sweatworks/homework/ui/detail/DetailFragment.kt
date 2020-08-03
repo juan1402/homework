@@ -54,7 +54,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(BR.viewModel, R.layou
     private fun subscribeObservers() = with(viewModel) {
         contentAdapter.userItemActions.subscribe(viewLifecycleOwner, ::handleAdapterAction)
         detailActions.subscribe(viewLifecycleOwner, ::handleDetailAction)
-        userData.subscribe(viewLifecycleOwner) { contentAdapter.update(it) }
+        userData.subscribe(viewLifecycleOwner) { contentAdapter.loadMore(it) }
     }
 
     private fun handleDetailAction(action: DetailActions) {

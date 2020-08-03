@@ -1,6 +1,5 @@
 package com.sweatworks.homework.ui.home
 
-
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -51,10 +50,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(BR.viewModel, R.layout.fr
         val owner = viewLifecycleOwner
         contentAdapter.userItemActions.subscribe(owner) { handleAction(contentAdapter, it) }
         headerAdapter.userItemActions.subscribe(owner) { handleAction(headerAdapter, it) }
-        reloadedHeaderData.subscribe(owner) { headerAdapter.replace(it) }
-        searchUserData.subscribe(owner) { contentAdapter.replace(it) }
-        headerData.subscribe(owner) { headerAdapter.update(it) }
-        contentData.subscribe(owner) { contentAdapter.update(it) }
+        reloadedHeaderData.subscribe(owner) { headerAdapter.replaceAll(it) }
+        searchUserData.subscribe(owner) { contentAdapter.replaceAll(it) }
+        headerData.subscribe(owner) { headerAdapter.loadMore(it) }
+        contentData.subscribe(owner) { contentAdapter.loadMore(it) }
     }
 
     private fun setUpUserGridList(decorator: ItemDecorator) =

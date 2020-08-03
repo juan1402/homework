@@ -11,6 +11,7 @@ import com.sweatworks.domain.interaction.user.SearchUserUseCase
 import com.sweatworks.domain.model.User
 import com.sweatworks.domain.model.onFailure
 import com.sweatworks.domain.model.onSuccess
+import com.sweatworks.homework.common.utils.Event
 import com.sweatworks.homework.common.utils.IntentEvent
 import com.sweatworks.homework.ui.base.BaseActivity
 import com.sweatworks.homework.ui.base.BaseViewModel
@@ -95,7 +96,7 @@ class HomeViewModel(
     }
 
     fun fireDetailEvent(user: User) = intentEvent.apply {
-        value = IntentEvent(DetailActivity::class, detailArguments(user), false)
+        value = Event(IntentEvent(DetailActivity::class, detailArguments(user), false))
     }
 
     private fun detailArguments(user: User) = Bundle().apply {

@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.sweatworks.homework.common.extensions.subscribe
+import com.sweatworks.homework.common.utils.Event
 import com.sweatworks.homework.common.utils.IntentEvent
 
 abstract class BaseFragment<T : ViewDataBinding>(
@@ -46,10 +48,12 @@ abstract class BaseFragment<T : ViewDataBinding>(
         Snackbar.make(requireView(), error, Snackbar.LENGTH_SHORT).show()
     }
 
-    private fun handleIntentEvent(intentEvent: IntentEvent) {
-        val event = Intent(requireContext(), intentEvent.clazz.java)
-        event.putExtra(BaseActivity.BASE_ARGUMENTS, intentEvent.arguments)
-        if (intentEvent.finishCurrent) requireActivity().finish()
-        startActivity(event)
+    private fun handleIntentEvent(intentEvent: Event<IntentEvent>) {
+        intentEvent.getContentIfNotHandled()?.let {
+            val event = Intent(requireContext(), it.clazz.java)
+            event.putExtra(BaseActivity.BASE_ARGUMENTS, it.arguments)
+            if (it.finishCurrent) requireActivity().finish()
+            startActivity(event)
+        }
     }
 }
